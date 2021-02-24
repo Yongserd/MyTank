@@ -11,10 +11,9 @@ import java.awt.event.WindowEvent;
  * @date 2021/2/23 15:11
  **/
 public class TankFrame extends Frame {
-    int x = 200;
-    int y = 200;
-    Dir dir = Dir.DOWN;
-    private final int speed = 10;
+
+    Tank tank = new Tank(200,200,Dir.DOWN);
+
     public TankFrame(){
         this.setResizable(true);//可调整大小
         this.setSize(800,600);//窗口大小
@@ -86,16 +85,16 @@ public class TankFrame extends Frame {
 
         private void setTankDirection(){
             if(bl){
-                dir = Dir.LEFT;
+                tank.setDir(Dir.LEFT);
             }
             if(br){
-                dir = Dir.RIGHT;
+                tank.setDir(Dir.RIGHT);
             }
             if(bu){
-                dir = Dir.UP;
+                tank.setDir(Dir.UP);
             }
             if(bd){
-                dir = Dir.DOWN;
+                tank.setDir(Dir.DOWN);
             }
 
         }
@@ -104,21 +103,7 @@ public class TankFrame extends Frame {
     //重写paint方法，当窗口重新绘制的时候调用此方法
     @Override
     public void paint(Graphics g){
-        g.fillRect(x,y,50,50);
-        switch (dir) {
-            case LEFT:
-                x-=speed;
-                break;
-            case RIGHT:
-                x+=speed;
-                break;
-            case UP:
-                y-=speed;
-                break;
-            case DOWN:
-                y+=speed;
-                break;
-        }
+        tank.paint(g);
     }
 
 }
