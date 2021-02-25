@@ -16,9 +16,11 @@ public class TankFrame extends Frame {
 
     Bullet b = new Bullet(300,300,Dir.DOWN);
 
+    private static final int GAME_WIDTH = 800,GAME_HEIGHT = 600;
+
     public TankFrame(){
         this.setResizable(true);//可调整大小
-        this.setSize(800,600);//窗口大小
+        this.setSize(GAME_WIDTH,GAME_HEIGHT );//窗口大小
         this.setTitle("Tank War!");//标题
         this.setVisible(true);//可见
         //监听键盘
@@ -114,4 +116,19 @@ public class TankFrame extends Frame {
         b.paint(g);
     }
 
+    Image offScreenImage = null;
+    //解决画面闪烁问题
+    @Override
+    public void update(Graphics g) {
+        if(offScreenImage == null){
+            offScreenImage = this.createImage(GAME_WIDTH,GAME_HEIGHT);
+        }
+        Graphics graphics = offScreenImage.getGraphics();
+        Color c = graphics.getColor();
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(0,0,GAME_WIDTH,GAME_HEIGHT);
+        graphics.setColor(c);
+        paint(graphics);
+        g.drawImage(offScreenImage,0,0,null);
+    }
 }

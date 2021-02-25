@@ -7,11 +7,11 @@ import java.awt.*;
  * @date 2021/2/25 23:29
  **/
 public class Bullet {
-    private int speed = 10;
+    private int speed = 1;
     private Dir dir;
     private int x,y;
-    private static final int WIDTH = 5;
-    private static final int HEIGHT = 5;
+    private static final int WIDTH = 30;
+    private static final int HEIGHT = 30;
 
     public Bullet(int x,int y,Dir dir){
         this.x = x;
