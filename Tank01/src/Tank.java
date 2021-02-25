@@ -11,6 +11,7 @@ public class Tank {
     int y;
     Dir dir;
     private static final int speed = 10;
+    private boolean moving = false;//是否处于静止
 
     public void setDir(Dir dir) {
         this.dir = dir;
@@ -24,19 +25,31 @@ public class Tank {
 
     public void paint(Graphics g){
         g.fillRect(x,y,50,50);
-        switch (dir) {
-            case LEFT:
-                x-=speed;
-                break;
-            case RIGHT:
-                x+=speed;
-                break;
-            case UP:
-                y-=speed;
-                break;
-            case DOWN:
-                y+=speed;
-                break;
+        move();
+
+
+    }
+
+    public void move(){
+        if(moving){
+            switch (dir) {
+                case LEFT:
+                    x-=speed;
+                    break;
+                case RIGHT:
+                    x+=speed;
+                    break;
+                case UP:
+                    y-=speed;
+                    break;
+                case DOWN:
+                    y+=speed;
+                    break;
+            }
         }
+    }
+
+    public void setMoving(boolean move){
+        this.moving = move;
     }
 }
