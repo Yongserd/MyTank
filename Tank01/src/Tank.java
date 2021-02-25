@@ -11,7 +11,7 @@ public class Tank {
   Dir dir;
   private static final int speed = 5;
   private boolean moving = false; // 是否处于静止
-
+  private TankFrame tankFrame;
   public void setDir(Dir dir) {
     this.dir = dir;
   }
@@ -20,10 +20,11 @@ public class Tank {
     return this.dir;
   }
 
-  public Tank(int x, int y, Dir dir) {
+  public Tank(int x, int y, Dir dir,TankFrame tankFrame) {
     this.x = x;
     this.y = y;
     this.dir = dir;
+    this.tankFrame = tankFrame;
   }
 
   public void paint(Graphics g) {
@@ -56,5 +57,9 @@ public class Tank {
 
   public void setMoving(boolean move) {
     this.moving = move;
+  }
+
+  public void fire() {
+    tankFrame.b = new Bullet(x,y,dir);
   }
 }

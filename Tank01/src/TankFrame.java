@@ -12,7 +12,7 @@ import java.awt.event.WindowEvent;
  **/
 public class TankFrame extends Frame {
 
-    Tank tank = new Tank(200,200,Dir.DOWN);
+    Tank tank = new Tank(200,200,Dir.DOWN,this);
 
     Bullet b = new Bullet(300,300,Dir.DOWN);
 
@@ -81,6 +81,9 @@ public class TankFrame extends Frame {
                 case KeyEvent.VK_DOWN:
                     bd = false;
                     break;
+                    //监听ctrl键，发射子弹
+                case KeyEvent.VK_CONTROL:
+                    tank.fire();
                 default:
                     break;
             }
