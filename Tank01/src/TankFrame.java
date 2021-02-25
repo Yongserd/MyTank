@@ -14,6 +14,8 @@ public class TankFrame extends Frame {
 
     Tank tank = new Tank(200,200,Dir.DOWN);
 
+    Bullet b = new Bullet(300,300,Dir.DOWN);
+
     public TankFrame(){
         this.setResizable(true);//可调整大小
         this.setSize(800,600);//窗口大小
@@ -109,6 +111,7 @@ public class TankFrame extends Frame {
     @Override
     public void paint(Graphics g){
         tank.paint(g);
+        b.paint(g);
     }
 
 }
