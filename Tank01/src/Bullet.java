@@ -12,14 +12,20 @@ public class Bullet {
     private int x,y;
     private static final int WIDTH = 30;
     private static final int HEIGHT = 30;
+    private boolean live = true;
+    private TankFrame tankFrame;
 
-    public Bullet(int x,int y,Dir dir){
+    public Bullet(int x,int y,Dir dir,TankFrame tankFrame){
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.tankFrame = tankFrame;
     }
 
     public void paint(Graphics g){
+        if(!live){
+            tankFrame.bulletList.remove(this);
+        }
         Color c = g.getColor();
         g.setColor(Color.RED);
         g.fillOval(x,y,WIDTH,HEIGHT);
@@ -40,6 +46,10 @@ public class Bullet {
                 break;
             case DOWN:
                 this.y+=speed;
+        }
+        //判断子弹是否存活
+        if(this.x >TankFrame.GAME_WIDTH || this.y > TankFrame.GAME_HEIGHT || this.x < 0 || this.y < 0){
+            live = false;
         }
     }
 }

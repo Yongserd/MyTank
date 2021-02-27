@@ -3,7 +3,8 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
+import java.util.ArrayList;
+import java.util.List;
 /**
  * @author liangshan
  * @ClassName TankFrame
@@ -14,9 +15,10 @@ public class TankFrame extends Frame {
 
     Tank tank = new Tank(200,200,Dir.DOWN,this);
 
-    Bullet b = new Bullet(300,300,Dir.DOWN);
+//    Bullet b = new Bullet(300,300,Dir.DOWN);
+    List<Bullet> bulletList = new ArrayList<>();
 
-    private static final int GAME_WIDTH = 800,GAME_HEIGHT = 600;
+    protected static final int GAME_WIDTH = 800,GAME_HEIGHT = 600;
 
     public TankFrame(){
         this.setResizable(true);//可调整大小
@@ -115,8 +117,18 @@ public class TankFrame extends Frame {
     //重写paint方法，当窗口重新绘制的时候调用此方法
     @Override
     public void paint(Graphics g){
+        Color c = g.getColor();
+        g.setColor(Color.WHITE);
+        g.drawString("子弹袋数量：" + bulletList.size(),10,60);
+        g.setColor(c);
+
         tank.paint(g);
-        b.paint(g);
+        /*bulletList.forEach(e ->{
+            e.paint(g);
+        });*/
+        for (int i = 0; i < bulletList.size(); i++) {
+          bulletList.get(i).paint(g);
+        }
     }
 
     Image offScreenImage = null;
