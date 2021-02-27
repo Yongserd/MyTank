@@ -12,6 +12,8 @@ public class Tank {
   private static final int speed = 5;
   private boolean moving = false; // 是否处于静止
   private TankFrame tankFrame;
+  private static final int WIDTH = ResouceMgr.tankD.getWidth(null);
+  private static final int HEIGHT = ResouceMgr.tankD.getHeight(null);
   public void setDir(Dir dir) {
     this.dir = dir;
   }
@@ -28,10 +30,23 @@ public class Tank {
   }
 
   public void paint(Graphics g) {
-    Color c = g.getColor();
-    g.setColor(Color.YELLOW);
-    g.fillRect(x, y, 50, 50);
-    g.setColor(c);
+    switch (dir){
+      case LEFT:
+        g.drawImage(ResouceMgr.tankL,x,y,null);
+        break;
+      case RIGHT:
+        g.drawImage(ResouceMgr.tankR,x,y,null);
+        break;
+      case UP:
+        g.drawImage(ResouceMgr.tankU,x,y,null);
+        break;
+        case DOWN:
+        g.drawImage(ResouceMgr.tankD,x,y,null);
+        break;
+      default:
+        break;
+    }
+
     move();
 
   }
@@ -60,6 +75,8 @@ public class Tank {
   }
 
   public void fire() {
-    tankFrame.bulletList.add(new Bullet(x + 25,y + 25,dir,tankFrame));
+    int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
+    int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
+    tankFrame.bulletList.add(new Bullet(bX,bY,dir,tankFrame));
   }
 }

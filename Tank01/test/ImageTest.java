@@ -20,6 +20,8 @@ public class ImageTest {
         try {
             imageIO = ImageIO.read(new File("D:\\study\\MyTank\\Tank01\\src\\images\\BadTank1.png"));
             assertNotNull(imageIO);
+            BufferedImage read = ImageIO.read(ImageTest.class.getClassLoader().getResourceAsStream("images/BadTank1.png"));
+            assertNotNull(read);
         } catch (IOException e) {
             e.printStackTrace();
         }

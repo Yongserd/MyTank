@@ -7,11 +7,11 @@ import java.awt.*;
  * @date 2021/2/25 23:29
  **/
 public class Bullet {
-    private int speed = 1;
+    private int speed = 10;
     private Dir dir;
     private int x,y;
-    private static final int WIDTH = 30;
-    private static final int HEIGHT = 30;
+    public static final int WIDTH = ResouceMgr.bulletD.getWidth(null);
+    public static final int HEIGHT = ResouceMgr.bulletD.getHeight(null);
     private boolean live = true;
     private TankFrame tankFrame;
 
@@ -26,10 +26,22 @@ public class Bullet {
         if(!live){
             tankFrame.bulletList.remove(this);
         }
-        Color c = g.getColor();
-        g.setColor(Color.RED);
-        g.fillOval(x,y,WIDTH,HEIGHT);
-        g.setColor(c);
+        switch (dir){
+            case LEFT:
+                g.drawImage(ResouceMgr.bulletL,x,y,null);
+                break;
+            case RIGHT:
+                g.drawImage(ResouceMgr.bulletR,x,y,null);
+                break;
+            case UP:
+                g.drawImage(ResouceMgr.bulletU,x,y,null);
+                break;
+            case DOWN:
+                g.drawImage(ResouceMgr.bulletD,x,y,null);
+                break;
+            default:
+                break;
+        }
         move();
     }
 
