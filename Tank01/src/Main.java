@@ -12,7 +12,7 @@ public class Main {
       TankFrame tankFrame = new TankFrame();
     // 敌方tank
     for (int i = 0; i < 5;i++) {
-      tankFrame.tanks.add(new Tank(200 + i*80,200,Dir.DOWN,tankFrame));
+      tankFrame.tanks.add(new Tank(200 + i*80,200,Dir.DOWN,Group.BAD,tankFrame));
     }
       //每隔50毫秒刷新窗口
       for(;;){

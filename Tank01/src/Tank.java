@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.Random;
 
 /**
  * @author liangshan @ClassName Tank
@@ -10,11 +11,13 @@ public class Tank {
   int y;
   Dir dir;
   private static final int speed = 5;
-  private boolean moving = false; // 是否处于静止
+  private boolean moving = true; // 是否处于静止
   private TankFrame tankFrame;
   private static final int WIDTH = ResouceMgr.tankD.getWidth(null);
   private static final int HEIGHT = ResouceMgr.tankD.getHeight(null);
   private boolean live =true;
+  private Random random = new Random();
+  private Group group;
 
   public int getX() {
     return x;
@@ -56,11 +59,12 @@ public class Tank {
     return this.dir;
   }
 
-  public Tank(int x, int y, Dir dir,TankFrame tankFrame) {
+  public Tank(int x, int y, Dir dir,Group group,TankFrame tankFrame) {
     this.x = x;
     this.y = y;
     this.dir = dir;
     this.tankFrame = tankFrame;
+    this.group = group;
   }
 
   public void paint(Graphics g) {
@@ -105,15 +109,32 @@ public class Tank {
           break;
       }
     }
+    if(random.nextInt(10) > 8 && this.group == Group.BAD){
+      this.fire();
+    }
+    randomDir();
+
+  }
+
+  private void randomDir() {
+
   }
 
   public void setMoving(boolean move) {
     this.moving = move;
   }
 
+  public Group getGroup() {
+    return group;
+  }
+
+  public void setGroup(Group group) {
+    this.group = group;
+  }
+
   public void fire() {
     int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
     int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
-    tankFrame.bulletList.add(new Bullet(bX,bY,dir,tankFrame));
+    tankFrame.bulletList.add(new Bullet(bX,bY,dir,this.group,tankFrame));
   }
 }

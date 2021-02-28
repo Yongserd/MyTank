@@ -14,11 +14,13 @@ public class Bullet {
     public static final int HEIGHT = ResouceMgr.bulletD.getHeight(null);
     private boolean live = true;
     private TankFrame tankFrame;
+    private Group group;
 
-    public Bullet(int x,int y,Dir dir,TankFrame tankFrame){
+    public Bullet(int x,int y,Dir dir,Group group,TankFrame tankFrame){
         this.x = x;
         this.y = y;
         this.dir = dir;
+        this.group = group;
         this.tankFrame = tankFrame;
     }
 
@@ -65,7 +67,20 @@ public class Bullet {
         }
     }
 
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
     public void collideWith(Tank tank) {
+        //默认不开启队友伤害
+        if (tank.getGroup() == this.group){
+            return;
+        }
+
         Rectangle bullet = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
         Rectangle tank1 = new Rectangle(tank.getX(), tank.getY(), Tank.getWIDTH(), Tank.getHEIGHT());
         if(bullet.intersects(tank1)){
