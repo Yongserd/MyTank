@@ -13,8 +13,8 @@ import java.util.List;
  **/
 public class TankFrame extends Frame {
 
-    Tank tank = new Tank(200,200,Dir.DOWN,this);
-
+    Tank tank = new Tank(200,400,Dir.DOWN,this);
+    List<Tank> tanks = new ArrayList<>();
 //    Bullet b = new Bullet(300,300,Dir.DOWN);
     List<Bullet> bulletList = new ArrayList<>();
 
@@ -120,7 +120,9 @@ public class TankFrame extends Frame {
         Color c = g.getColor();
         g.setColor(Color.WHITE);
         g.drawString("子弹袋数量：" + bulletList.size(),10,60);
+        g.drawString("坦克数量：" + tanks.size(),10,80);
         g.setColor(c);
+
 
         tank.paint(g);
         /*bulletList.forEach(e ->{
@@ -128,6 +130,16 @@ public class TankFrame extends Frame {
         });*/
         for (int i = 0; i < bulletList.size(); i++) {
           bulletList.get(i).paint(g);
+        }
+
+        for (int i = 0; i < tanks.size(); i++) {
+          tanks.get(i).paint(g);
+        }
+        // 子弹和tank的碰撞检测
+        for (int i = 0; i < bulletList.size(); i++ ){
+            for (int j = 0; j < tanks.size(); j++) {
+                bulletList.get(i).collideWith(tanks.get(j));
+            }
         }
     }
 

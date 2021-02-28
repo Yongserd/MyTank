@@ -14,6 +14,40 @@ public class Tank {
   private TankFrame tankFrame;
   private static final int WIDTH = ResouceMgr.tankD.getWidth(null);
   private static final int HEIGHT = ResouceMgr.tankD.getHeight(null);
+  private boolean live =true;
+
+  public int getX() {
+    return x;
+  }
+
+  public void setX(int x) {
+    this.x = x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
+  public void setY(int y) {
+    this.y = y;
+  }
+
+  public static int getWIDTH() {
+    return WIDTH;
+  }
+
+  public static int getHEIGHT() {
+    return HEIGHT;
+  }
+
+  public boolean isLive() {
+    return live;
+  }
+
+  public void setLive(boolean live) {
+    this.live = live;
+  }
+
   public void setDir(Dir dir) {
     this.dir = dir;
   }
@@ -30,6 +64,9 @@ public class Tank {
   }
 
   public void paint(Graphics g) {
+    if(!live){
+      tankFrame.tanks.remove(this);
+    }
     switch (dir){
       case LEFT:
         g.drawImage(ResouceMgr.tankL,x,y,null);
