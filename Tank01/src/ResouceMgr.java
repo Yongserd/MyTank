@@ -1,5 +1,5 @@
 import javax.imageio.ImageIO;
-import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
@@ -9,9 +9,9 @@ import java.io.IOException;
  * @date 2021/2/27 22:14
  **/
 public class ResouceMgr {
-    public static Image tankL,tankR,tankU,tankD;
-    public static Image bulletL,bulletR,bulletU,bulletD;
-
+    public static BufferedImage tankL,tankR,tankU,tankD;
+    public static BufferedImage bulletL,bulletR,bulletU,bulletD;
+    public static BufferedImage[] boom;
     static {
         try {
             tankL = ImageIO.read(ResouceMgr.class.getClassLoader().getResourceAsStream("images/tankL.gif"));
@@ -22,6 +22,10 @@ public class ResouceMgr {
             bulletR = ImageIO.read(ResouceMgr.class.getClassLoader().getResourceAsStream("images/bulletR.gif"));
             bulletU = ImageIO.read(ResouceMgr.class.getClassLoader().getResourceAsStream("images/bulletU.gif"));
             bulletD = ImageIO.read(ResouceMgr.class.getClassLoader().getResourceAsStream("images/bulletD.gif"));
+            boom = new BufferedImage[16];
+          for (int i = 0; i < boom.length; i++) {
+              boom[i] = ImageIO.read(ResouceMgr.class.getResourceAsStream("images/e" + (i + 1) +".gif"));
+          }
         } catch (IOException e) {
             e.printStackTrace();
         }
