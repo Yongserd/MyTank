@@ -94,6 +94,22 @@ public class Tank {
 
   public void move() {
     if (moving) {
+      //边界检测
+      if(this.group == Group.BAD ){
+        if(this.x <= 0){
+          this.dir = Dir.RIGHT;
+        }
+        if(this.x + WIDTH >= TankFrame.GAME_WIDTH){
+          this.dir = Dir.LEFT;
+        }
+        if(this.y <= 0){
+          this.dir = Dir.DOWN;
+        }
+        if(this.y + HEIGHT >= TankFrame.GAME_HEIGHT){
+          this.dir = Dir.UP;
+        }
+      }
+
       switch (dir) {
         case LEFT:
           x -= speed;
@@ -136,5 +152,9 @@ public class Tank {
     int bX = this.x + Tank.WIDTH/2 - Bullet.WIDTH/2;
     int bY = this.y + Tank.HEIGHT/2 - Bullet.HEIGHT/2;
     tankFrame.bulletList.add(new Bullet(bX,bY,dir,this.group,tankFrame));
+  }
+
+  public void die() {
+    this.live = false;
   }
 }

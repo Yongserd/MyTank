@@ -16,8 +16,8 @@ public class TankFrame extends Frame {
     Tank tank = new Tank(200,400,Dir.DOWN,Group.GOOD,this);
     List<Tank> tanks = new ArrayList<>();
     List<Bullet> bulletList = new ArrayList<>();
-    Boom boom = new Boom(100,100);
-    protected static final int GAME_WIDTH = 800,GAME_HEIGHT = 600;
+    List<Boom> booms = new ArrayList<>();
+    protected static final int GAME_WIDTH = 1000,GAME_HEIGHT = 960;
 
     public TankFrame(){
         this.setResizable(true);//可调整大小
@@ -140,7 +140,10 @@ public class TankFrame extends Frame {
                 bulletList.get(i).collideWith(tanks.get(j));
             }
         }
-        boom.paint(g);
+    for (int i = 0; i < booms.size(); i++) {
+        booms.get(i).paint(g);
+    }
+
     }
 
     Image offScreenImage = null;
