@@ -16,7 +16,7 @@ public class Main {
     }
       //每隔50毫秒刷新窗口
       for(;;){
-          Thread.sleep(50);
+          Thread.sleep(25);
           tankFrame.repaint();
       }
 

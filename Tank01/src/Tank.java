@@ -128,12 +128,15 @@ public class Tank {
     if(random.nextInt(10) > 8 && this.group == Group.BAD){
       this.fire();
     }
-    randomDir();
+    if(Group.BAD == this.group && random.nextInt(100) > 95){
+      randomDir();
+    }
+
 
   }
 
   private void randomDir() {
-
+    this.dir = Dir.values()[random.nextInt(4)];
   }
 
   public void setMoving(boolean move) {

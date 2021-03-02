@@ -87,7 +87,7 @@ public class Bullet {
             tank.die();
             this.die();
             //产生爆炸效果
-            tankFrame.booms.add(new Boom(tank1.x,tank1.y,this.tankFrame));
+            tankFrame.booms.add(new Boom(tank1.x + Tank.getWIDTH()/2 - Boom.WIDTH/2,tank1.y + Tank.getHEIGHT()/2 - Boom.HEIGHT/2,this.tankFrame));
         }
     }
 
