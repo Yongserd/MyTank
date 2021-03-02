@@ -18,6 +18,7 @@ public class Tank {
   private boolean live =true;
   private Random random = new Random();
   private Group group;
+  private Rectangle rectangle;
 
   public int getX() {
     return x;
@@ -29,6 +30,10 @@ public class Tank {
 
   public int getY() {
     return y;
+  }
+
+  public Rectangle getRectangle() {
+    return rectangle;
   }
 
   public void setY(int y) {
@@ -65,6 +70,7 @@ public class Tank {
     this.dir = dir;
     this.tankFrame = tankFrame;
     this.group = group;
+    rectangle = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
   }
 
   public void paint(Graphics g) {
@@ -111,6 +117,10 @@ public class Tank {
           break;
       }
     }
+
+    rectangle.x = this.x;
+    rectangle.y = this.y;
+
     if(random.nextInt(10) > 8 && this.group == Group.BAD){
       this.fire();
     }

@@ -16,12 +16,15 @@ public class Bullet {
     private TankFrame tankFrame;
     private Group group;
 
+    private Rectangle rectangle;
+
     public Bullet(int x,int y,Dir dir,Group group,TankFrame tankFrame){
         this.x = x;
         this.y = y;
         this.dir = dir;
         this.group = group;
         this.tankFrame = tankFrame;
+        rectangle = new Rectangle(this.x,this.y,WIDTH,HEIGHT);
     }
 
     public void paint(Graphics g){
@@ -61,6 +64,8 @@ public class Bullet {
             case DOWN:
                 this.y+=speed;
         }
+        rectangle.x = this.x;
+        rectangle.y = this.y;
         //判断子弹是否存活
         if(this.x >TankFrame.GAME_WIDTH || this.y > TankFrame.GAME_HEIGHT || this.x < 0 || this.y < 0){
             live = false;
@@ -81,13 +86,12 @@ public class Bullet {
             return;
         }
 
-        Rectangle bullet = new Rectangle(this.x, this.y, WIDTH, HEIGHT);
-        Rectangle tank1 = new Rectangle(tank.getX(), tank.getY(), Tank.getWIDTH(), Tank.getHEIGHT());
-        if(bullet.intersects(tank1)){
+
+        if(rectangle.intersects(tank.getRectangle())){
             tank.die();
             this.die();
             //产生爆炸效果
-            tankFrame.booms.add(new Boom(tank1.x + Tank.getWIDTH()/2 - Boom.WIDTH/2,tank1.y + Tank.getHEIGHT()/2 - Boom.HEIGHT/2,this.tankFrame));
+            tankFrame.booms.add(new Boom(tank.x + Tank.getWIDTH()/2 - Boom.WIDTH/2,tank.y + Tank.getHEIGHT()/2 - Boom.HEIGHT/2,this.tankFrame));
         }
     }
 
