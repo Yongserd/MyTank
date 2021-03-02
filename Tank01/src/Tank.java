@@ -13,8 +13,8 @@ public class Tank {
   private static final int speed = 5;
   private boolean moving = true; // 是否处于静止
   private TankFrame tankFrame;
-  private static final int WIDTH = ResouceMgr.tankD.getWidth(null);
-  private static final int HEIGHT = ResouceMgr.tankD.getHeight(null);
+  private static final int WIDTH = ResouceMgr.goodTankU.getWidth();
+  private static final int HEIGHT = ResouceMgr.goodTankU.getHeight();
   private boolean live =true;
   private Random random = new Random();
   private Group group;
@@ -73,16 +73,16 @@ public class Tank {
     }
     switch (dir){
       case LEFT:
-        g.drawImage(ResouceMgr.tankL,x,y,null);
+        g.drawImage(this.group == Group.GOOD ? ResouceMgr.goodTankL : ResouceMgr.badTankL,x,y,null);
         break;
       case RIGHT:
-        g.drawImage(ResouceMgr.tankR,x,y,null);
+        g.drawImage(this.group == Group.GOOD ? ResouceMgr.goodTankR : ResouceMgr.badTankR,x,y,null);
         break;
       case UP:
-        g.drawImage(ResouceMgr.tankU,x,y,null);
+        g.drawImage(this.group == Group.GOOD ? ResouceMgr.goodTankU : ResouceMgr.badTankU,x,y,null);
         break;
-        case DOWN:
-        g.drawImage(ResouceMgr.tankD,x,y,null);
+      case DOWN:
+        g.drawImage(this.group == Group.GOOD ? ResouceMgr.goodTankD : ResouceMgr.badTankD,x,y,null);
         break;
       default:
         break;
@@ -95,21 +95,7 @@ public class Tank {
   public void move() {
     if (moving) {
       //边界检测
-      if(this.group == Group.BAD ){
-        if(this.x <= 0){
-          this.dir = Dir.RIGHT;
-        }
-        if(this.x + WIDTH >= TankFrame.GAME_WIDTH){
-          this.dir = Dir.LEFT;
-        }
-        if(this.y <= 0){
-          this.dir = Dir.DOWN;
-        }
-        if(this.y + HEIGHT >= TankFrame.GAME_HEIGHT){
-          this.dir = Dir.UP;
-        }
-      }
-
+      boundaryCheck();
       switch (dir) {
         case LEFT:
           x -= speed;
@@ -133,6 +119,21 @@ public class Tank {
     }
 
 
+  }
+
+  private void boundaryCheck() {
+    if(this.x <= 5){
+      this.x = 5;
+    }
+    if(this.x + WIDTH >= TankFrame.GAME_WIDTH -5){
+      this.x = TankFrame.GAME_WIDTH - WIDTH - 5;
+    }
+    if(this.y <= 35){
+      this.y = 35;
+    }
+    if(this.y + HEIGHT >= TankFrame.GAME_HEIGHT -5){
+      this.y = TankFrame.GAME_HEIGHT - HEIGHT - 5;
+    }
   }
 
   private void randomDir() {
